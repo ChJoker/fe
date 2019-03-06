@@ -1,0 +1,44 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    color: #424242;
+    font-family: arial;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.nav::after {
+    content: "";
+    display: inline;
+    clear: both;
+}
+
+.nav .list-item {
+    float: left;
+    margin: 0 5px;
+    height: 30px;
+    line-height: 30px;
+    
+}
+
+.nav .list-item a {
+    color: #f40;
+    padding: 0 5px;
+    border-radius: 15px;
+    height: 30px;
+    font-weight: bolder;
+    display: inline-block;
+}
+
+.nav .list-item a:hover {
+    color: #ffffff;
+    background-color: #ff4400;
+
+}
+

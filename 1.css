@@ -1,0 +1,35 @@
+/* 
+!important Infinity
+行间选择器              1000
+id                      100
+class | 属性 | 伪类        10
+标签选择器 | 伪元素          1
+通配符                      0
+*/
+
+div{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color:black !important;
+}
+
+#only {
+    background-color: yellow;   
+}
+
+.demo {
+    background-color: blue;
+}
+
+div {
+    background-color: pink;
+}
+
+span {
+    color: rgba(133, 19, 19, 0.63);
+}
+
+[hh] {
+    background-color: rgb(92, 43, 43);
+}
