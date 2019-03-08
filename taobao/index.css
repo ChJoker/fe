@@ -123,12 +123,40 @@ body {
     height: 70px;
 }
 
-
+/* 搜索框 */
 .wrapper .search-wrap {
     width: 100%;
     height: 97px;
     padding-top: 24px;
     border: 1px solid black;
+}
+
+.wrapper .search-wrap .search-panel {
+    width: 1190px;
+    height: 88px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.wrapper .search-wrap .search-panel .logo-box {
+    display: inline-block;
+    width: 190px;
+    height: 80px;
+    border: 1px solid black;    
+}
+
+.wrapper .search-wrap .search-panel .search-box {
+    display: inline-block;
+    width: 630px;
+    height: 87px;
+    border: 1px solid black;    
+}
+
+.wrapper .search-wrap .search-panel .mobile-taobao {
+    display: inline-block;
+    width: 76px;
+    height: 90px;
+    border: 1px solid black;    
 }
 
 .wrapper .sreen-nav {
