@@ -145,7 +145,7 @@ body {
     width: 190px;
     height: 105px;
     /* border: 1px solid black; */
-    background-image: url('img/logo.png');
+    background-image: url("img/logo.png");
     background-size: 100% 100%;
     position: relative;
     top: -10px;
@@ -183,10 +183,16 @@ body {
 }
 
 .wrapper .search-wrap .search-panel .search-box .search-t .search-tab li:hover {
-    background-color: #FFEEE5;
+    background-color: #ffeee5;
 }
 
-.wrapper .search-wrap .search-panel .search-box .search-t .search-tab li.select {
+.wrapper
+.search-wrap
+.search-panel
+.search-box
+.search-t
+.search-tab
+li.select {
     color: #fff;
     font-weight: 700;
     background: linear-gradient(to right, #ff9000 0, #ff5000 100%);
@@ -201,7 +207,14 @@ body {
     position: relative;
 }
 
-.wrapper .search-wrap .search-panel .search-box .search-t .search-input form .btn {
+.wrapper
+.search-wrap
+.search-panel
+.search-box
+.search-t
+.search-input
+form
+.btn {
     width: 74px;
     height: 40px;
     /* border: 1px solid black;  */
@@ -213,7 +226,15 @@ body {
     overflow: hidden;
 }
 
-.wrapper .search-wrap .search-panel .search-box .search-t .search-input form .btn button {
+.wrapper
+.search-wrap
+.search-panel
+.search-box
+.search-t
+.search-input
+form
+.btn
+button {
     width: 100%;
     height: 100%;
     background: linear-gradient(to right, #ff9000 0, #ff5000 100%);
@@ -224,7 +245,14 @@ body {
     cursor: pointer;
 }
 
-.wrapper .search-wrap .search-panel .search-box .search-t .search-input form .search-inp-box {
+.wrapper
+.search-wrap
+.search-panel
+.search-box
+.search-t
+.search-input
+form
+.search-inp-box {
     width: 551px;
     height: 36px;
     border: 2px solid #ff5000;
@@ -233,13 +261,29 @@ body {
     overflow: hidden;
 }
 
-.wrapper .search-wrap .search-panel .search-box .search-t .search-input form .search-inp-box .search-inp {
+.wrapper
+.search-wrap
+.search-panel
+.search-box
+.search-t
+.search-input
+form
+.search-inp-box
+.search-inp {
     width: 472px;
     height: 36px;
-
 }
 
-.wrapper .search-wrap .search-panel .search-box .search-t .search-input form .search-inp-box .search-inp input {
+.wrapper
+.search-wrap
+.search-panel
+.search-box
+.search-t
+.search-input
+form
+.search-inp-box
+.search-inp
+input {
     width: 472px;
     height: 24px;
     border: none;
@@ -278,9 +322,8 @@ body {
     /* border: 1px solid black; */
 }
 
-
 .wrapper .search-wrap .search-panel .search-box .search-b a {
-    color: #3C3C3C;
+    color: #3c3c3c;
     font-size: 12px;
     line-height: 20px;
     font-weight: 300;
@@ -291,13 +334,11 @@ body {
     color: #f40;
 }
 
-
 .wrapper .search-wrap .search-panel .code-box {
     display: inline-block;
     width: 76px;
     height: 90px;
     border: 1px solid #eee;
-    ;
     vertical-align: top;
     margin-left: 120px;
     position: relative;
@@ -428,7 +469,6 @@ body {
     padding-bottom: 3px;
     border: 1px solid #ff5000;
     border-top: none;
-
 }
 
 .wrapper .sreen-box .main .main-inner .inner-left li {
@@ -443,12 +483,10 @@ body {
 
 .wrapper .sreen-box .main .main-inner .inner-left li:hover {
     background-color: #ffe4dc;
-
 }
 
 .wrapper .sreen-box .main .main-inner .inner-left li:hover a {
     color: #ff5000;
-
 }
 
 .wrapper .sreen-box .main .main-inner .inner-left li a {
@@ -465,7 +503,6 @@ body {
     vertical-align: top;
     position: absolute;
     right: 10px;
-
 }
 
 .wrapper .sreen-box .main .main-inner .inner-content {
@@ -529,7 +566,6 @@ body {
     padding-top: 11px;
     font-size: 12px;
     color: #666;
-
 }
 
 .wrapper .sreen-box .main-bottom {
@@ -624,7 +660,7 @@ body {
 }
 
 .wrapper .sreen-box .col-right .member-wrap .member .member-bd .hello {
-    color: #3C3C3C;
+    color: #3c3c3c;
     font-size: 12px;
     text-align: center;
     display: block;
@@ -678,10 +714,10 @@ body {
     display: inline-block;
     height: 25px;
     line-height: 25px;
-    color: #FFF;
+    color: #fff;
     font-size: 14px;
     background: linear-gradient(to right, #ff9000 0, #ff5000 100%);
-    border-radius: 5px
+    border-radius: 5px;
 }
 
 .wrapper .sreen-box .col-right .member-wrap .member .member-ft a.login {
@@ -703,7 +739,7 @@ body {
     background-color: #ffe4dd;
 }
 
-.wrapper .sreen-box .col-right .tipoff a{
+.wrapper .sreen-box .col-right .tipoff a {
     display: inline-block;
     text-align: center;
     width: 100%;
@@ -781,6 +817,7 @@ body {
     height: 25px;
     float: left;
 }
+
 .wrapper .sreen-box .col-right .post .news ul li a {
     font-size: 12px;
     color: #3c3c3c;
@@ -813,7 +850,7 @@ body {
     font-size: 12px;
 }
 
-.wrapper .sreen-box .col-right .entrance li a:hover{
+.wrapper .sreen-box .col-right .entrance li a:hover {
     color: #f40;
 }
 
@@ -824,8 +861,9 @@ body {
     /* border: 1px solid black; */
     margin-top: 11px;
 }
+
 .wrapper .sreen-box .col-right .entrance li a span {
-    background: url('./img/pics.png')
+    background: url("./img/pics.png");
 }
 
 .wrapper .sreen-box .col-right .entrance li a p {
@@ -833,6 +871,7 @@ body {
     height: 24px;
     line-height: 24px;
 }
+
 .wrapper .sreen-box .col-right .app h3 {
     width: 276px;
     height: 30px;
@@ -859,10 +898,12 @@ body {
 
 .wrapper .sreen-box .col-right .app .logo li {
     float: left;
+    width: 32px;
+    height: 32px;
+    margin: 0 21px 8px 0;
 }
 
 .wrapper .sreen-box .col-right .app .logo li img {
     width: 32px;
     height: 32px;
-    margin: 0 21px 8px 0;
 }
