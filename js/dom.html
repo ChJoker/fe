@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <!-- comment -->
+    <span>
+        <em></em>
+    </span>
+    <div>
+        <p>
+            <span></span>
+            <em></em>
+        </p>
+    </div>
+    <p></p>
+    <a href="#">
+
+    </a>
+</div>
+
+<script>
+    console.log("abc");
+    var div = document.getElementsByTagName("div")[0];
+    var em = document.getElementsByTagName("em")[1];
+
+    function scanMyChildren(e, tab) {
+        var cn = e.childNodes;
+        var len = cn.length;
+        for (var i = 0; i < len; i++) {
+            var n = cn[i];
+            if (n.nodeType === 1) {
+                var printTab = "";
+                for (var j = 0; j < tab; j++) {
+                    printTab += '\t';
+                }
+                console.log(printTab + n.nodeName);
+                getMyChildren(n, tab + 1);
+            }
+        }
+    }
+
+    function getAncestor(e, n) {
+        while (e && n) {
+            e = e.parentNode;
+            n--;
+        }
+        return e;
+    }
+
+    function myChildren() {
+        var cn = this.childNodes;
+        var len = cn.length;
+        var childeEle = {
+            length: 0,
+            push: Array.prototype.push
+        };
+        for (var i = 0; i < len; i++) {
+            var n = cn[i];
+            if (n.nodeType === 1) {
+                childeEle.push(n)
+            }
+        }
+        return childeEle;
+    }
+    Element.prototype.myChildren = myChildren
+
+    var appendDiv = document.createElement("div");
+    var appendP = document.createElement("p");
+    appendP.setAttribute("class", "slogan");
+    appendP.innerText= "i am p element";
+    var appendS = document.createElement("strong");
+    appendS.innerText = "i am strong";
+
+    document.body.appendChild(appendDiv);
+    appendDiv.appendChild(appendP);
+    appendDiv.appendChild(appendS);
+
+</script>
+</body>
+</html>

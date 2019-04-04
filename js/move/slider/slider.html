@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .wrapper {
+            width: 400px;
+            height: 250px;
+            position: relative;
+            margin: 100px auto 0;
+            overflow: hidden;
+        }
+
+        .wrapper .slider-page {
+            position: absolute;
+            width: 2000px;
+            height: 250px;
+        }
+
+        .wrapper .slider-page li {
+            width: 400px;
+            height: 250px;
+            float: left;
+        }
+
+        .wrapper .slider-page li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrapper .btn {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            top: 50%;
+            margin-top: -20px;
+            color: #ffffff;
+            background-color: #3c3c3c;
+            opacity: 0.1;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .wrapper .btn:hover {
+            opacity: 1;
+        }
+
+        .wrapper .left-btn {
+            left: 15px;
+        }
+
+        .wrapper .right-btn {
+            right: 15px;
+        }
+
+        .wrapper .slider-index {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            height: 22px;
+            line-height: 22px;
+            text-align: center;
+        }
+
+        .wrapper .slider-index span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .wrapper .slider-index span.active {
+            background-color: #ff4400;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <ul class="slider-page">
+        <li>
+            <img src="./imgs/cat1.jpg" alt="">
+        </li>
+        <li>
+            <img src="./imgs/cat2.jpg" alt="">
+        </li>
+        <li>
+            <img src="./imgs/cat3.jpg" alt="">
+        </li>
+        <li>
+            <img src="./imgs/cat4.jpg" alt="">
+        </li>
+        <li>
+            <img src="./imgs/cat1.jpg" alt="">
+        </li>
+    </ul>
+    <div class="btn left-btn">&lt;</div>
+    <div class="btn right-btn">&gt;</div>
+    <div class="slider-index">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <script src="js/move.js"></script>
+    <script>
+
+        var sliderPage = document.getElementsByClassName('slider-page')[0];
+        var sliderIndexes = document.getElementsByClassName('slider-index')[0].getElementsByTagName('span');
+        var moveDistance = sliderPage.children[0].offsetWidth;
+        var btns = document.getElementsByClassName('btn');
+        var num = sliderPage.children.length;
+        btns[0].onclick = function () {
+            moveSlider('move-left');
+        };
+        btns[1].onclick = function () {
+            moveSlider('move-right');
+        };
+
+        for (var i = 0; i < num - 1; i++) {
+            (function (i) {
+                sliderIndexes[i].onclick = function () {
+                    moveSlider('' + i);
+                }
+            }(i));
+        }
+
+
+        function moveSlider(direction) {
+            if (!sliderPage.lock) {
+                sliderPage.lock = true;
+                clearTimeout(sliderPage.timer);
+                if (!direction || direction === 'move-right') {
+                    changeActive(sliderPage.offsetLeft - moveDistance);
+                    changeMulAttrSlow(sliderPage, {'left': sliderPage.offsetLeft - moveDistance}, function () {
+                        if (Math.abs(sliderPage.offsetLeft) === (num - 1) * moveDistance) {
+                            sliderPage.style.left = '0px';
+                        }
+                        sliderPage.lock = false;
+                        sliderPage.timer = setTimeout(moveSlider, 2000);
+                    });
+                } else if (direction === 'move-left') {
+                    if (sliderPage.offsetLeft === 0) {
+                        sliderPage.style.left = (-(num - 1) * moveDistance) + 'px';
+                    }
+                    changeActive(sliderPage.offsetLeft + moveDistance);
+                    changeMulAttrSlow(sliderPage, {'left': sliderPage.offsetLeft + moveDistance}, function () {
+                        sliderPage.lock = false;
+                        sliderPage.timer = setTimeout(moveSlider, 2000);
+
+                    });
+                } else {
+                    var nIndex = parseInt(direction);
+                    if (!(nIndex >= 0)) {
+                        sliderPage.lock = false;
+                        return;
+                    } else {
+                        var newOffset = -nIndex * moveDistance;
+                        changeActive(newOffset);
+                        changeMulAttrSlow(sliderPage, {'left': newOffset}, function () {
+                            sliderPage.lock = false;
+                            sliderPage.timer = setTimeout(moveSlider, 2000);
+                        });
+                    }
+                }
+            }
+        }
+
+        function changeActive(offset) {
+            var active = document.getElementsByClassName('slider-index')[0].getElementsByClassName('active')[0];
+            active.className = '';
+            var idx = parseInt(Math.abs(offset) / moveDistance) % (num - 1);
+            sliderIndexes[idx].className = 'active';
+        }
+
+        sliderPage.timer = setTimeout(moveSlider, 2000);
+
+    </script>
+</div>
+
+</body>
+</html>

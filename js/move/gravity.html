@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+
+</div>
+
+<script>
+    var dom = document.getElementsByTagName("div")[0];
+
+    dom.onclick = function () {
+        gravityMove(dom);
+    };
+
+    function gravityMove(dom) {
+        clearInterval(dom.timer);
+        var speedX = 6, speedY = 8;
+        var g = 3;
+        dom.timer = window.setInterval(function () {
+            speedY += g;
+            var nTop = dom.offsetTop + speedY;
+            var nLeft = dom.offsetLeft + speedX;
+
+            if (nTop > document.documentElement.clientHeight - dom.offsetHeight) {
+                speedY *= -1;
+                speedY *= 0.8;
+                speedX *= 0.8;
+                nTop = document.documentElement.clientHeight - dom.offsetHeight;
+            } else if (nTop < 0) {
+                speedY *= -1;
+                speedY *= 0.8;
+                speedX *= 0.8;
+                nTop = 0;
+            }
+
+            if (nLeft > document.documentElement.clientWidth - dom.offsetWidth) {
+                speedX *= -1;
+                speedX *= 0.8;
+                nLeft = document.documentElement.clientWidth - dom.offsetWidth;
+            } else if (nLeft < 0) {
+                speedX *= -1;
+                speedX *= 0.8;
+                nLeft = 0;
+            }
+
+            speedX = Math.abs(speedX) <= 1 ? 0 : speedX;
+            speedY = Math.abs(speedY) <= 1 ? 0 : speedY;
+            if (speedX === 0 && speedY === 0 && nTop === document.documentElement.clientHeight - dom.offsetHeight) {
+                clearInterval(dom.timer);
+            }
+
+            dom.style.left = nLeft + 'px';
+            dom.style.top = nTop + 'px';
+        }, 30)
+
+    }
+</script>
+
+</body>
+</html>

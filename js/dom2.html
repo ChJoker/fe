@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <!-- comment -->
+    <span></span>
+    <em></em>
+    <div></div>
+    <p></p>
+</div>
+
+<script>
+    console.log("abc");
+    var div = document.getElementsByTagName("div")[0];
+    var em = document.getElementsByTagName("em")[0];
+    var p = document.getElementsByTagName("p")[0];
+
+    var divNew = document.createElement("div");
+    divNew.setAttribute("class", "new");
+
+    Element.prototype.insertAfter = function (node, child) {
+        var children = this.children;
+        var len = children.length;
+        var finded = false;
+        for (var i = 0; i < len; i++) {
+            if (children[i] === child) {
+                finded = true;
+                break;
+            }
+        }
+        if (finded) {
+            if (child.nextElementSibling) {
+                return this.insertBefore(node, child.nextElementSibling);
+            }
+            this.appendChild(node);
+            return node;
+        }
+        throw new DOMException("adb");
+    };
+
+    Element.prototype.reverse = function () {
+        for (var i = this.childNodes.length - 1; i >= 0; i--) {
+            this.appendChild(this.childNodes[i]);
+        }
+    }
+</script>
+</body>
+</html>

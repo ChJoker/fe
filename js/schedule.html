@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <input class="minute" type="text" value="0"> 分
+    <input class="second" type="text" value="0"> 秒
+
+</div>
+
+<script>
+
+    var minute = document.getElementsByTagName("input")[0];
+    var second = document.getElementsByTagName("input")[1];
+
+    function count(time) {
+        var minute = document.getElementsByTagName("input")[0];
+        var second = document.getElementsByTagName("input")[1];
+        minute.value = 0;
+        second.value = 0;
+        var count = window.setInterval(function () {
+            if (second.value == 59) {
+                second.value = 0;
+                minute.value = parseInt(minute.value) + 1;
+            } else {
+                second.value = parseInt(second.value) + 1;
+            }
+            if (minute.value * 60 + second.value * 1 >= time) {
+                window.clearInterval(count);
+            }
+        }, 1000);
+    }
+
+
+</script>
+</body>
+</html>

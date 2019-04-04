@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+<script type="application/javascript">
+    function two_pow(n) {
+        var ret = 1;
+        for (var i = 0; i < n; i++) {
+            ret *= 2;
+        }
+        return ret;
+    }
+
+    function factorial(n) {
+        var ret = 1;
+        for (var i = 1; i <= n; i++) {
+            ret *= i;
+        }
+        return ret;
+    }
+
+    function find_prime_number(n) {
+        var ret = [];
+        for (var i = 1; i <= n; i++) {
+            var find = true;
+            for (var j = 2; j < i; j++) {
+                if (i % j === 0) {
+                    find = false;
+                    break;
+                }
+            }
+            if (find) {
+                ret.push(i);
+            }
+        }
+        return ret;
+    }
+</script>
+</body>
+</html>

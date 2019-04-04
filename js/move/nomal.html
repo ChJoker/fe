@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .change-width, div {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            position: absolute;
+            left: 0px;
+            top: 0;
+        }
+
+        span {
+            height: 400px;
+            background-color: #3c3c3c;
+            position: absolute;
+            left: 400px;
+            top: 0;
+            width: 1px;
+        }
+
+        #btn {
+            margin-top: 150px;
+            margin-left: 300px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div></div>
+<div class="change-width" style="top: 150px;"></div>
+<div class="change-width" style="top: 300px;"></div>
+<div class="change-width" style="top: 450px;"></div>
+<span></span>
+<button id='btn'>run</button>
+<script>
+
+    function getStyle(dom, attr) {
+        if (window.getComputedStyle) {
+            return window.getComputedStyle(dom, null)[attr];
+        } else {
+            return dom.currentStyle[attr];
+        }
+    }
+
+    var div = document.getElementsByTagName('div')[0];
+    var divs = document.getElementsByClassName('change-width');
+    var span = document.getElementsByTagName('span')[0];
+    var btn = document.getElementById('btn');
+    var timer = null;
+
+    btn.onclick = function () {
+        changeMulAttrSlow(div, {'left': 700, 'opacity': 50}, function () {
+            alert('finish')
+        });
+    };
+
+    for (var i in divs) {
+
+        divs[i].onmouseenter = function () {
+            changeWidth(this, 400);
+        };
+
+        divs[i].onmouseleave = function () {
+            changeWidth(this, 100)
+        };
+    }
+
+    function changeMulAttrSlow(dom, attrs, callback) {
+        window.clearInterval(dom.timer);
+        dom.timer = window.setInterval(function () {
+            var stop = true;
+            for (var attr in attrs) {
+                var cur = null, change = null;
+                var target = attrs[attr];
+                if (attr === 'opacity') {
+                    cur = parseFloat(getStyle(dom, attr)) * 100;
+                } else {
+                    cur = parseInt(getStyle(dom, attr));
+                }
+                change = (target - cur) / 10;
+                change = change > 0 ? Math.ceil(change) : Math.floor(change);
+                if (cur === target) {
+                    continue;
+                }
+                stop = false;
+                if (attr === 'opacity') {
+                    dom.style[attr] = (cur + change) / 100;
+                } else {
+                    dom.style[attr] = cur + change + 'px';
+                }
+            }
+            if (stop) {
+                window.clearInterval(dom.timer);
+                typeof callback == 'function' && callback();
+            }
+        }, 30)
+    }
+
+    function changeAttrSlow(dom, target, attr) {
+        window.clearInterval(dom.timer);
+        var cur = null, change = null;
+        dom.timer = window.setInterval(function () {
+            if (attr === 'opacity') {
+                cur = parseFloat(getStyle(dom, attr)) * 100;
+            } else {
+                cur = parseInt(getStyle(dom, attr));
+            }
+            change = (target - cur) / 10;
+            change = change > 0 ? Math.ceil(change) : Math.floor(change);
+            if (cur === target) {
+                window.clearInterval(dom.timer);
+                return;
+            }
+            if (attr === 'opacity') {
+                dom.style[attr] = (cur + change) / 100;
+            } else {
+                dom.style[attr] = cur + change + 'px';
+            }
+
+        }, 30)
+    }
+
+
+    function changeOpacity(dom, target) {
+        window.clearTimeout(dom.timer);
+        dom.timer = window.setInterval(function () {
+            var iCur = parseFloat(getStyle(dom, 'opacity'));
+            var iChange = (target - iCur) / 10;
+            if (Math.abs(iChange) <= 0.001) {
+                window.clearInterval(dom.timer);
+                dom.style.opacity = target;
+            } else {
+                dom.style.opacity = iCur + iChange;
+            }
+        }, 30)
+
+    }
+
+
+    function changeWidth(dom, target) {
+        window.clearInterval(dom.timer);
+        dom.timer = window.setInterval(function () {
+            var cWidth = parseInt(getStyle(dom, 'width'));
+            var change = (target - cWidth) / 7;
+            change = change > 0 ? Math.ceil(change) : Math.floor(change);
+            if (Math.abs(target - cWidth) <= Math.abs(change)) {
+                clearInterval(timer);
+                dom.style.width = target + 'px';
+            } else {
+                dom.style.width = cWidth + change + 'px';
+            }
+        }, 30)
+    }
+
+    function move(dom, target) {
+        window.clearInterval(timer);
+        var end = target.offsetLeft;
+        timer = setInterval(function () {
+            var speed = (end - dom.offsetLeft) / 10;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+            if (Math.abs(end - dom.offsetLeft) <= Math.abs(speed)) {
+                clearInterval(timer);
+                dom.style.left = end + 'px';
+            } else {
+                dom.style.left = dom.offsetLeft + speed + 'px';
+            }
+        }, 30)
+    }
+
+    // function move(dom, target) {
+    //     window.clearInterval(timer);
+    //     var end = target.offsetLeft;
+    //     var speed = dom.offsetLeft < end ? 7 : -7;
+    //     timer = setInterval(function () {
+    //         if (Math.abs(end - dom.offsetLeft) < Math.abs(speed)) {
+    //             clearInterval(timer);
+    //             dom.style.left = end + 'px';
+    //         } else {
+    //             dom.style.left = dom.offsetLeft + speed + 'px';
+    //         }
+    //     }, 30)
+    // }
+</script>
+</body>
+</html>

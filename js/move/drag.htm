@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style type="text/css">
+
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    div {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+        left: 0;
+        top: 0;
+    }
+</style>
+<body>
+<div></div>
+
+<script>
+    var oDiv = document.getElementsByTagName("div")[0];
+
+    oDiv.onmousedown = function (e) {
+        window.clearInterval(oDiv.timer);
+        var event = e || event;
+        var self = this;
+        var disTop = this.offsetTop - event.clientY;
+        var disLeft = this.offsetLeft - event.clientX;
+        var lastX = this.offsetLeft, lastY = this.offsetTop;
+        var speedX = 0, speedY = 0;
+        document.onmousemove = function (e) {
+            var event = e || event;
+            var newLeft = event.clientX + disLeft;
+            var newTop = event.clientY + disTop;
+
+            speedX = newLeft - lastX;
+            speedY = newTop - lastY;
+
+            lastX = newLeft;
+            lastY = newTop;
+
+            self.style.left = newLeft + 'px';
+            self.style.top = newTop + 'px';
+        };
+
+        document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+            gravityMove(self, speedX, speedY);
+        }
+    };
+
+
+    function gravityMove(dom, speedX, speedY) {
+        clearInterval(dom.timer);
+        var g = 3;
+        dom.timer = window.setInterval(function () {
+            speedY += g;
+            var nTop = dom.offsetTop + speedY;
+            var nLeft = dom.offsetLeft + speedX;
+
+            if (nTop > document.documentElement.clientHeight - dom.offsetHeight) {
+                speedY *= -1;
+                speedY *= 0.8;
+                speedX *= 0.8;
+                nTop = document.documentElement.clientHeight - dom.offsetHeight;
+            } else if (nTop < 0) {
+                speedY *= -1;
+                speedY *= 0.8;
+                speedX *= 0.8;
+                nTop = 0;
+            }
+
+            if (nLeft > document.documentElement.clientWidth - dom.offsetWidth) {
+                speedX *= -1;
+                speedX *= 0.8;
+                nLeft = document.documentElement.clientWidth - dom.offsetWidth;
+            } else if (nLeft < 0) {
+                speedX *= -1;
+                speedX *= 0.8;
+                nLeft = 0;
+            }
+
+            speedX = Math.abs(speedX) <= 1 ? 0 : speedX;
+            speedY = Math.abs(speedY) <= 1 ? 0 : speedY;
+            if (speedX === 0 && speedY === 0 && nTop === document.documentElement.clientHeight - dom.offsetHeight) {
+                clearInterval(dom.timer);
+            }
+
+            dom.style.left = nLeft + 'px';
+            dom.style.top = nTop + 'px';
+        }, 30)
+    }
+</script>
+</body>
+</html>
