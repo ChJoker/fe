@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div></div>
+<div class="haha"></div>
+<div id="abc"></div>
+
+<script>
+
+    function getDom(str) {
+
+        var allDom = document.getElementsByTagName('*');
+
+        function getDomByAttr(domArr, attr, target) {
+            var selectedDom = [];
+            for (var i = 0; i < domArr.length; i++) {
+                if (attr === 'tag') {
+                    if (domArr[i].tagName.toUpperCase() === target.toUpperCase()) {
+                        selectedDom.push(domArr[i]);
+                    }
+                } else if (domArr[i].getAttribute(attr) === target) {
+                    selectedDom.push(domArr[i]);
+                }
+            }
+            return selectedDom;
+        }
+
+        if (str.startsWith('#')) {
+            return getDomByAttr(allDom, 'id', str.substr(1));
+        }
+
+        if (str.startsWith('.')) {
+            return getDomByAttr(allDom, 'class', str.substr(1));
+        }
+
+        return getDomByAttr(allDom, 'tag', str);
+    }
+
+</script>
+
+</body>
+</html>
